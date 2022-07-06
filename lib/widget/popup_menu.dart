@@ -7,11 +7,12 @@ class PopupMenu extends StatelessWidget {
       {Key? key,
       required this.callbackDelete,
       required this.task,
-      required this.likeordislike, required this.editTask})
+      required this.likeordislike, required this.editTask, required this.restoreTask})
       : super(key: key);
   final VoidCallback callbackDelete;
   final VoidCallback likeordislike;
   final VoidCallback editTask;
+  final VoidCallback restoreTask;
   final Task task;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,6 @@ class PopupMenu extends StatelessWidget {
       itemBuilder: task.isDeleted == false
           ? ((context) => [
                 PopupMenuItem(
-
                   child: TextButton.icon(
                       onPressed: editTask,
                       icon: const Icon(Icons.edit),
@@ -45,7 +45,7 @@ class PopupMenu extends StatelessWidget {
           : (context) => [
                 PopupMenuItem(
                   child: TextButton.icon(
-                      onPressed: () {},
+                      onPressed: restoreTask,
                       icon: const Icon(Icons.restore_from_trash),
                       label: const Text('Restore')),
                 ),

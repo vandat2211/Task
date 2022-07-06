@@ -30,7 +30,6 @@ class TasksState extends Equatable {
         pendingTasks: List<Task>.from(map['pendingTasks']?.map((x) => Task.fromMap(x))),
         completedTasks: List<Task>.from(map['completedTasks']?.map((x) => Task.fromMap(x))),
         favoriteTasks: List<Task>.from(map['favoriteTasks']?.map((x) => Task.fromMap(x))),
-        removedTask:
-            List<Task>.from(map['removedTask']?.map((x) => Task.fromMap(x))));
+        removedTask: List<Task>.from(map['removedTask']?.map((x) => Task.fromMap(x))));
   }
 }

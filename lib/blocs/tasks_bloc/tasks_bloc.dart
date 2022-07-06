@@ -11,6 +11,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     on<removedTask>(_onRemovedTask);
     on<MarkFavoriteOrUnfavoriteTask>(_onMarkFavoriteOrUnfavoriteTask);
     on<EditTask>(_onEditTask);
+    on<RestoreTask>(_onRestoreTask);
   }
 
   void _onAddTask(AddTask event, Emitter<TasksState> emit) {
@@ -117,6 +118,18 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
        removedTask: state.removedTask,
      )
    );
+ }
+ void _onRestoreTask(RestoreTask event,Emitter<TasksState> emit){
+    final state = this.state;
+    emit(
+      TasksState(
+        removedTask: List.from(state.removedTask)..remove(event.task),
+        pendingTasks: List.from(state.pendingTasks)
+          ..insert(0, event.task.copyWith(isDeleted: false,isDone: false,isFavorite: false)),
+        completedTasks: state.completedTasks,
+        favoriteTasks: state.favoriteTasks,
+      )
+    );
  }
   @override
   TasksState? fromJson(Map<String, dynamic> json) {
